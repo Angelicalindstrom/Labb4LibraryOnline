@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Labb4LibraryOnline.Models.BookLoan>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Online Library</h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="body">
+                    <a asp-controller="BookLoans" asp-action="Create" asp-route-status="" class="btn btn-primary">Borrow a book</a>
+            </div>
+        </div>
+    </div>
+</div>

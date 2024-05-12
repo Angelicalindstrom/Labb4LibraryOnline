@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Labb4LibraryOnline.Models.BookLoan>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Borrowed Books / Filter</h1>
+
+
+@using (Html.BeginForm("Index", "BookLoans", FormMethod.Get))
+{
+        <div class="form-group">
+            <label>Select Customer:</label>
+            <select name="customerName" class="form-control">
+                <option value="">All Customers</option>
+            @foreach (var customer in ViewBag.Customers)
+            {
+            <option value="@customer.Value">@customer.Text</option>
+            }
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model=> model.Customer.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model=>model.Book.BookTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookLoanDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model =>model.BookReturnDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model =>model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+                <tr>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.Book.BookTitle) - @Html.DisplayFor(modelItem => item.Book.BookAuthor)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.BookLoanDate)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.BookReturnDate)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.BookLoanId">Return/Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.BookLoanId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.BookLoanId">Delete</a>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>

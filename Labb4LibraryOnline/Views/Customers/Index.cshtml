@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Labb4LibraryOnline.Models.Customer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Customer Details</h1>
+
+<p>
+    <a asp-action="Create">Create New Customer</a>
+</p>
+
+@using (Html.BeginForm("Index", "Customers", FormMethod.Get))
+{
+        <div class="form-group">
+            <label>Select Name:</label>
+                <select name="customerName" class="form-control">
+                <option value="">All Customers</option>
+            @foreach (var customer in ViewBag.Customers)
+            {
+            <option value="@customer.CustomerName">@customer.CustomerName</option>
+            }
+            </select>
+        </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerAdress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerMail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerPhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FavGenre)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+                <tr>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.CustomerAdress)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.CustomerMail)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.CustomerPhoneNumber)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.FavGenre)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.CustomerId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.CustomerId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.CustomerId">Delete</a>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
